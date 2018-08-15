@@ -7,7 +7,9 @@ public class Sentence {
     int numOfWords;
     double score;
     int sentenceNumber;
+    //Actual sentence
     String value;
+    //Sentence stripped of stopwords and alphabetized
     String[] sortedValues;
 
     public Sentence(int numOfWords, int sentenceNumber, String value, String[] sortedValues){

@@ -13,7 +13,7 @@ public class OperationsTest {
     public void splitIntoParagraphsTest() throws Exception {
         Operations operations = new Operations();
         ArrayList<Paragraph> test = new ArrayList<>();
-        File file = new File("C:\\Users\\Richard\\Personal_Project\\words.txt");
+        File file = new File("C:\\Users\\Richard\\Personal_Projects\\Autocomplete\\words.txt");
         test = operations.splitIntoParagraphs(file);
         System.out.println(test.get(3).storedSentences.get(0).value);
         assertEquals(test.size(), 4);

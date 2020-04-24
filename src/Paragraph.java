@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class Paragraph {
     int paragraphNumber;
     ArrayList<Sentence> storedSentences;
+    double[][] score;
 
     public Paragraph(int paragraphNumber, ArrayList<Sentence> container){
         this.paragraphNumber = paragraphNumber;
         this.storedSentences = container;
+        score = new double[container.size()][container.size()];
     }
 
 }

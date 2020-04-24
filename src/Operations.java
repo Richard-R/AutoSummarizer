@@ -13,13 +13,14 @@ import java.util.*;
 public class Operations {
     int numOfSentences;
     int numOfParagraphs;
-    double[][] scoreGraph;
+    //double[][] scoreGraph;
 
     public Operations() {
         this.numOfParagraphs = 0;
         this.numOfSentences = 0;
     }
 
+    //tokenize string
     public static void tokenize(String a) {
         StringTokenizer st = new StringTokenizer(a, " ");
         while (st.hasMoreElements()) {
@@ -27,6 +28,7 @@ public class Operations {
         }
     }
 
+    //split the file into paragraphs, creating Paragraph objects for each one
     public ArrayList<Paragraph> splitIntoParagraphs(File file) throws Exception {
 
         ArrayList<Paragraph> collection = new ArrayList<>();
@@ -58,6 +60,7 @@ public class Operations {
             String[] shortenedSentence = Stopwords.buildSortedArray(curr);
             int wordCount = curr.split("\\s+").length;
             toReturn.add(new Sentence(wordCount, numOfSentences, curr, shortenedSentence));
+            numOfSentences++;
         }
         return toReturn;
     }
@@ -66,14 +69,47 @@ public class Operations {
         double score = 0;
         Set<String> common = new HashSet<>(Arrays.asList(st1.sortedValues));
         common.retainAll(new HashSet<>(Arrays.asList(st2.sortedValues)));
-        score = common.size() / st1.sortedValues.length;
+        score = (double)(common.size()) / (double)(st1.sortedValues.length + st2.sortedValues.length) / 2.0;
         return score;
     }
 
 
-    public double[][] generateArray(){
-        double[][] pizza = new double[1][1];
-        return pizza;
+    public double[][] generateArray(Paragraph toMatrix){
+        int sentenceSize = toMatrix.storedSentences.size();
+        double[][] matrix = new double[sentenceSize][sentenceSize];
+        for (int i = 0; i < sentenceSize; i++){
+            for (int j = i; j < sentenceSize; j++){
+                if (i == j){
+                    matrix[i][j] = 0;
+                } else {
+                    matrix[i][j] = sentenceScore(toMatrix.storedSentences.get(i),toMatrix.storedSentences.get(j));
+                }
+            }
+        }
+        return matrix;
+    }
 
+
+    public Sentence pickSentence(double[][] scores, ArrayList<Sentence> storedSen){
+        double[] totalScore = new double[scores.length];
+        for (int i = 0; i < scores.length; i++){
+            for (int j = 0; j < scores.length; j++){
+                if (scores[i][j] == 0){
+                    totalScore[i] += scores[j][i];
+                } else {
+                    totalScore[i] += scores[i][j];
+                }
+            }
+        }
+        int index = 0;
+        double maxCount = 0;
+        for (int i = 0; i < totalScore.length; i++){
+            if (totalScore[i] > maxCount){
+                index = i;
+                maxCount = totalScore[i];
+            }
+        }
+
+        return storedSen.get(index);
     }
 }

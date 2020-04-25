@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
  */
 public class Sentence {
     int numOfWords;
-    double score;
+    //double score;
     int sentenceNumber;
     //Actual sentence
     String value;
@@ -14,7 +14,7 @@ public class Sentence {
 
     public Sentence(int numOfWords, int sentenceNumber, String value, String[] sortedValues){
         this.numOfWords = numOfWords;
-        this.score = 0.0;
+        //this.score = 0.0;
         this.sentenceNumber = sentenceNumber;
         this.value = value;
         this.sortedValues = sortedValues;

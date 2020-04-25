@@ -57,6 +57,10 @@ public class Operations {
              end != BreakIterator.DONE;
              start = end, end = iterator.next()) {
             String curr = source.substring(start,end).trim();
+            //curr = curr.replaceAll("�", "\"");
+            curr = curr.replaceAll("“", "\"");
+            curr = curr.replaceAll("’", "\'");
+            curr = curr.replaceAll("”", "\"");
             String[] shortenedSentence = Stopwords.buildSortedArray(curr);
             int wordCount = curr.split("\\s+").length;
             toReturn.add(new Sentence(wordCount, numOfSentences, curr, shortenedSentence));

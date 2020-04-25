@@ -31,6 +31,7 @@ public class Stopwords {
 
     public static String[] buildSortedArray(String sentence){
         ArrayList<String> wordsList = new ArrayList<String>();
+        sentence = sentence.replaceAll("�", "'");
         sentence = sentence.replaceAll("\\.", "");
         sentence = sentence.replaceAll("\\?", "");
         sentence = sentence.replaceAll("\\;", "");
@@ -58,7 +59,7 @@ public class Stopwords {
 
 
     public static void main(String[] args) {
-        String[] tester = Stopwords.buildSortedArray("Paulo Freire writes about dehumanization, a \"distortion of the vocation of becoming more fully human\" (Freire, no page numbers) as not a set human historical reality but a transformable state. It is only through the struggle of the oppressed and praxis that they can regain their humanity, because oppressors cannot see past their own power distortions and \"false generosity\". Ultimately, the oppressed must avoid the duality of \"fear of freedom\" find true value in an authentic living, setting aside the consciousness of their subjugators. ");
+        String[] tester = Stopwords.buildSortedArray("I want to say this again, because if you�ll accept thispremise, it�ll go a long way toward helping ");
         for (int i = 0; i < tester.length; i++) {
             System.out.println(tester[i]);
         }
